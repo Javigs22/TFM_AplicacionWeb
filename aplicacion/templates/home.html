@@ -1,0 +1,42 @@
+{% extends "base_auth.html" %}
+
+<head>
+    <title>Funcionalidades</title>
+</head>
+
+{% block content %}
+<html>
+
+<body class="fondo">
+    <script src="/static/js/home.js"></script>
+    
+    <div class="contenedor_general">
+        <h2>Elección de funcionalidad</h2>
+        <p>Bienvenido a la página de selección de funcionalidad. Por favor, lea atentamente la descripción de cada funcionalidad, seleccione la funcionalidad deseada y presione el botón "Siguiente" para acceder a dicha funcionalidad. </p>
+
+        <div class="contenedor_especifico">
+            <h3>Create Questions</h3>
+            <p>Esta funcionalidad permite introducir un tema sobre el cual se mostrarán una serie de preguntas. Estas preguntas podrán ser seleecionadas e incluidas en un archivo xml, facilitando la elaboración de cuestionarios.</p>
+            <input type="radio" class="funcionalidad" id="funcionalidad1" name="funcionalidad" value="{% url 'createTest' %}">
+            
+        </div>
+        <div class="contenedor_especifico">
+            <h3>Show Questions</h3>
+            <p>Esta funcionalidad permite al usuario ver las preguntas que ha generado previamente. De esta forma podrá descargar alguna pregunta que haya realizado previamente.</p>
+            <input type="radio" class="funcionalidad" id="funcionalidad2" name="funcionalidad" value="{% url 'chooseSubject' %}">
+            
+        </div>
+
+        <div class="contenedor_especifico">
+            <h3>Create Subject</h3>
+            <p>Esta funcionalidad permite al usuario elegir en que carpeta quiere guardar el cuestionario de preguntas que cree posteriormente. De esta forma, al usar la funcionalidad "Show Questions" podrá elegir la Subject que quiere visualizar. </p>
+            <input type="radio" class="funcionalidad" id="funcionalidad3" name="funcionalidad" value="{% url 'createSubject' %}">
+            
+        </div>
+    </div>
+    <button class="boton-abajo" onclick="validateSelection()">Siguiente</button>
+
+</body>
+</html>
+
+{% endblock %}

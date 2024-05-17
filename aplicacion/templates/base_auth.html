@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block header1 %}
+    
+    
+    {% if user.verified %}
+        <p class="usuario">User: {{ user.get_username }}</p> 
+        <button onclick="window.location.href='/logout_extension'" class="boton-personalizado">Cerrar Sesión</button>
+    {% endif %}
+   
+    
+{% endblock %}

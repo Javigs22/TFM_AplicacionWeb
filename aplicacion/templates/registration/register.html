@@ -1,0 +1,46 @@
+{% extends "base_noauth.html" %}
+
+{% block title %}
+    <title>Registro</title>
+{% endblock %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        <div class = "contenedor_general">
+            <h2>Página de registro</h2>
+            <div class = "contenedor_especifico">
+                <label for="username">Nombre de usuario:</label>
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+
+            <div class = "contenedor_especifico">
+                <label for="password1">Contraseña:</label>
+                {{ form.password1 }}
+                {{ form.password1.errors }}
+            </div>
+            
+            <div class = "contenedor_especifico">
+                <label for="password2">Confirmación de contraseña:</label>
+                {{ form.password2 }}
+                {{ form.password2.errors }}
+            </div>
+            
+            <div class = "contenedor_especifico">
+                <label for="email">Correo electrónico:</label>
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+
+            <p class = "texto-abajo">¿Ya tienes una cuenta? <a href="accounts/login/?next=/postlogin" class="enlace">Inicia sesión aquí</a></p>
+        </div>
+
+        <button type="submit" class="boton-abajo">Registrar Usuario</button>
+
+    </form>
+{% endblock %}

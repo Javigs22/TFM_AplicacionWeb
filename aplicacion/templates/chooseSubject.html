@@ -1,0 +1,23 @@
+{% extends "base_auth.html" %}
+
+{% block title %}
+    <title>Elegir asignatura</title>
+{% endblock %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'showTests' %}">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class = "contenedor_general">  
+            <h2>Elegir asignatura</h2>   
+            <div class = "contenedor_especifico">
+                <label for="subject">Asignatura:</label>
+                {{ form.subject }}    
+                {{ form.subject.errors }}
+            </div>                   
+        </div>
+        <button type="submit" class="boton-abajo">Ver preguntas</button>
+        <button onclick="window.location.href='/home'" class="boton-abajo2">Volver atrás</button>
+    </form>
+{% endblock %}

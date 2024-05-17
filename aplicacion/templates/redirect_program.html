@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+    <title>Verification status</title>
+{% endblock %}
+
+{% block additional %}
+    <meta http-equiv="refresh" content="5;url=/home">
+{% endblock %}
+
+{% block content %}
+    <div class="contenedor_general">
+        <h2> El proceso se ha completado correctamente </h2>
+        <h4>{{ error }}</h4>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base_auth.html" %}
+
+{% block title %}
+<title>Formulario de preguntas</title>
+{% endblock %}
+
+{% block content %}
+    
+    <form method="POST" action="{% url 'questions' %}">
+        {% csrf_token %}
+        
+        
+        <div class = "contenedor_general">
+            <h2>Formulario de Preguntas</h2>
+            <div class="contenedor_especifico">
+                <label for="subject">Asignatura:</label>
+                {{ form.subject }}
+                {{ form.subject.errors }}
+            </div>
+
+            <div class = "contenedor_especifico">
+                <label for="topic">Tema: </label>
+                {{ form.topic }}
+                {{ form.topic.errors }}
+            </div>
+
+            <div class = "contenedor_especifico">
+                <label for="numberQuestions">Número de preguntas:</label>
+                {{ form.numberQuestions }}
+                {{ form.numberQuestions.errors }}
+            </div>
+            
+            <div class = "contenedor_especifico">        
+                <label for="questionType">Tipo de pregunta:</label>
+                {{ form.questionType }}
+                {{ form.questionType.errors }}
+            </div>
+
+            <div class = "contenedor_especifico">
+                <label for="adictionalInfo">Información adicional:</label>
+                <textarea name="adictionalInfo" rows="4" cols="50"></textarea><br>
+                {{ form.adictionalInfo.errors }}
+            </div>
+            
+        </div>
+        <button class="boton-abajo" type="submit">Enviar</button>
+        <button onclick="window.location.href='/home'" class="boton-abajo">Volver atrás</button>
+    </form>
+{% endblock %}

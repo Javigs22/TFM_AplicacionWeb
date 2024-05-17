@@ -1,0 +1,32 @@
+{% extends "base_auth.html" %}
+
+{% block link %}
+    <script src="/static/js/mostrarpreguntas.js"></script>
+{% endblock %}
+{% block title %}
+    <title>Mostrar preguntas</title>
+{% endblock %}
+
+{% block content %}    
+    
+    <div class = "contenedor_general" id="container">
+        <h2>Preguntas guardadas previamente</h2>
+        <h4>Por favor, seleccione el test que quiere visualizar.</h4>
+        <div class = "testAvailable" id="tests">
+            
+        </div>     
+    </div>
+
+    <script>
+        var questions = {{questions | safe}};
+        document.addEventListener("DOMContentLoaded", createTestButtons(questions));
+        document.addEventListener("DOMContentLoaded", seeTopics(questions));
+        document.addEventListener("DOMContentLoaded", updateHTMLButtons());
+    </script>
+
+    <button type="submit" class="boton-abajo" onclick="saveSelection()" class="boton-abajo">Descargar preguntas</button>
+    <button type="submit" class="boton-abajo" onclick="deleteSelections()" class="boton-abajo2">Borrar preguntas</button>
+    <button onclick="window.location.href='/home'" class="boton-abajo3">Volver atrás</button>
+
+
+{% endblock %}

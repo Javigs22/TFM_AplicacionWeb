@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="/static/css/diseno.css">
+    {% block link %}
+    {% endblock %}
+    {% block title %}
+    {% endblock %}
+    {% block additional %}
+    {% endblock %}
+
+</head>
+
+<header>
+    <div class="column-left">
+        <img src="/static/images/logo.png">
+        <h1 class="titulo">Lesson Master</h1>
+    </div>  
+    <div class="column-right">
+        {% block header1 %}
+        {% endblock %}  
+    </div>    
+</header>
+
+<body class="fondo">
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

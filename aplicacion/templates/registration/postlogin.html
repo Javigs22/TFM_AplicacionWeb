@@ -1,0 +1,26 @@
+{% extends "base_noauth.html" %}
+
+{% block title %}
+<title>Post login</title>
+{% endblock %}
+
+{% block content %}
+
+
+<form method="post" action="{% url 'postlogin' %}">
+    {% csrf_token %}
+        <div class="contenedor_general">
+            <h2>Autenticación multifactor</h2>
+            <h4>Por favor, escanea el código QR e introduce la secuencia de 6 dígitos para verificar tu identidad.</h4>
+            <div>
+                <label for="fcode">Secuencia:</label><br>
+                <input type="text" id="fcode" name="fcode" value=""><br>
+                
+            </div>
+        </div>
+        <button type="submit" value="send code" class="boton-abajo">Enviar código</button>
+        <!--<button type="submit" value="reload_qr" class="boton-abajo">Reenviar código</button> -->
+        
+</form>
+
+{% endblock %}

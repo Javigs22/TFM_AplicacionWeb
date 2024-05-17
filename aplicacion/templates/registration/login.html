@@ -1,0 +1,33 @@
+{% extends "base_noauth.html" %}
+
+{% block title %}
+    <title>Inicio de sesión</title>
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        <div class = "contenedor_general">
+            <h2>Bienvenido de nuevo</h2>
+            <p>Por favor, introduce tu nombre de usuario y tu contraseña.</p>
+            <div class = "contenedor_especifico">
+                <label for="username">Nombre de usuario:</label>
+                {{ form.username }}
+                {{ form.username.errors }}
+            </div>
+
+            <div class = "contenedor_especifico">        
+                <label for="password">Contraseña:</label>
+                {{ form.password }}
+                {{ form.password.errors }}
+            </div>
+
+            <p class = "texto-abajo">¿No tienes cuenta? <a href="/register" class="enlace">Registrate aquí</a></p> 
+            <p class = "texto-abajo">¿Has olvidado la contraseña? <a href="/accounts/password_reset" class="enlace">Reestablecela aquí</a></p> 
+        </div>
+            
+        <button type="submit" class="boton-abajo">Iniciar sesión</button>
+        <input type="hidden" name="next" value="{{ next }}"></button>
+    </form> 
+{% endblock %}

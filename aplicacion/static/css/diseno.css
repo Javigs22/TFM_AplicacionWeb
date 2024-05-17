@@ -1,0 +1,251 @@
+/* diseño del header */
+header {
+    color: #ffffff;
+    padding: 0px;
+    display: flex;
+    height: 120px;  
+}
+
+.fondo {
+    font-family: 'Arial', sans-serif;
+    background-color: #BBDEFB;
+    margin-top: 10px; 
+
+}
+
+/* Estilos para la columna izquierda */
+.column-left {
+    background-color: #00008B;
+    display: flex; /* Utilizamos flexbox para alinear elementos en columna */
+    align-items: center; /* Alinea verticalmente al centro */
+    border: none;
+    height: 80px;
+    border-radius: 0px;
+    margin: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+}
+
+/* Estilos para la columna derecha */
+.column-right {
+    background-color: #00008B;
+    display: flex; /* Utilizamos flexbox para alinear elementos en columna */
+    flex-direction: column; /* Columna vertical */
+    align-items: flex-end; /* Alinea elementos al final de la columna */
+    justify-content: center; /* Alinea elementos al final de la columna */
+    border: none;
+    height: 80px;
+    border-radius: 0px;
+    margin: 0px;
+    margin-top: 0px;
+}
+
+/* Estilos para el título */
+.titulo {
+    font-size: 35px; /* Tamaño del título */
+    font-weight: bold;
+    margin-right: 20px; /* Ajusta el margen derecho entre el título y la imagen */
+}
+
+/* Estilos para la imagen */
+img {
+    max-height: 70px; /* Ajusta la altura máxima de la imagen según tus necesidades */
+    margin-right: 30px; /* Ajusta el margen derecho entre la imagen y el título */
+}
+
+.image2 {
+    max-height: 200px; /* Ajusta la altura máxima de la imagen según tus necesidades */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* Estilos para el botón de la cabecera (Inicio/Cerrar Sesion) */
+.boton-personalizado {
+    border: none;
+    background-color: #1c46d1;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100px; /* Ancho del botón */
+    height: 50px; /* Alto del botón */
+    align-items: center; /* Alinea verticalmente al centro */
+    margin-right: 5%;
+}
+
+/* Estilos para el usuario */
+.usuario {
+    background-color: #00008B;
+    color: #ffffff;
+    font-size: 14px;
+    white-space: nowrap; /* Todo el texto en una misma línea */
+    margin-bottom: 10px; /* Espacio entre el usuario y el botón */
+    margin-top: 10px;
+    margin-right: 5%;
+}
+
+.texto-boton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.qrcode {
+    max-width: 240px; /* Ajusta la altura máxima de la imagen según tus necesidades */
+    max-height: 240px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.contenedor_general {
+    width: 80%;
+    margin: 5% auto;
+    padding: 1% 1%;
+    background-color: #00008B;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 4%;
+    margin-bottom: 4%;
+
+    
+}
+
+.div-quest_container{
+    width: 90%;
+    margin: 5% auto;
+    padding: 2% 2%;
+    background-color: #00008B;
+    color:#ffffff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+.contenedor_especifico, .testAvailable, div {
+    width: 90%;
+    margin: 5% auto;
+    padding: 2% 2%;
+    background-color: #2f4bed;
+    color:#ffffff;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #2f11c5;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    align-items: center;
+}
+
+/* Cambia color del botón al ponerse encima */
+button:hover {
+    background-color: #1034A6;
+}
+
+.boton-abajo, .boton-abajo2, .boton-abajo3 {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    bottom: 20px; /* Puedes ajustar esta propiedad para cambiar la distancia del botón desde la parte inferior */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    align-items: center;
+    margin-top: 2%;
+  }
+
+.texto-abajo{
+    color: #ffffff;
+    text-align: center;   
+}
+
+.enlace {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+h2 {
+    color: #ffffff;
+    margin-left: 30px;
+}
+
+h3 {
+    color: #ffffff;
+    margin-left: 30px;
+}
+
+h4 {
+    color: #ffffff;
+    margin-left: 30px;
+}
+
+p {
+    margin-left: 30px;
+    font-size: 16px; /* Tamaño del título */
+    color: #ffffff  
+}
+
+.archivo{
+    visibility: hidden;
+}
+
+.testAvailable li {
+    display: inline-block;
+    margin-right: 10px; /* Espacio entre botones */
+}
+
+.buttonTest{ 
+    padding: 10px 20px;
+    background-color: #00008B;
+    color: white;
+    text-align: center;
+    margin-right: 10px; /* Espacio entre botones */
+}
+
+.answer, .question {
+    margin-left: 3%;
+}
+
+.question-input-field{
+    margin-left: 3%;
+    margin-bottom: 2%;
+    color:#ffffff;
+}
+.question-name-field {
+    margin-left: 3%;
+    width: 94%;
+    text-align: center;
+    margin: 0 auto; /* Alinea horizontalmente el input */
+    display: block; /* Asegura que el input ocupe todo el ancho disponible */
+    justify-content: center;
+}
