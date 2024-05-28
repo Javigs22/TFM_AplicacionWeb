@@ -23,7 +23,7 @@ def sendEmail(email: str, subject: str, body: str, attach_file: str):
         - Si `attach_file` es una cadena vacía, ningún archivo se adjuntará al correo.
         - Si falla el envío del correo electrónico, se generará una excepción.
     """
-    print("AAAAAAAAA")
+    
     # Dirección de correo electrónico del remitente
     original_email = 'LessonMasterTeam@gmail.com'
     
@@ -99,16 +99,13 @@ Respuesta: Aquí la respuesta\n\
         if adictionalInfo:
             message2 = f"Para que las preguntas sean más concretas, te detallo a continuación los temas dados durante la asignatura. {adictionalInfo}"          
             message = message + message2
-            print(message)
             # Respuesta recibida introduciendo el mensaje formado por la petición básica y la información adiccional
             response = model.generate_content([message])    
             
         else:
-           print(message)
            # Respuesta recibida introduciendo el mensaje formado por la petición básica
            response = model.generate_content([message])
         
-        print(response.text)
                              
         # Patrones de expresiones regulares para extraer preguntas y respuestas del texto generado
         patternQ = r'[1-9][0-9]?\..*?(?=Respuesta:)'
@@ -140,16 +137,13 @@ Respuesta: (B) AQUI VUELVE A ESCRIBIR ESTRICTAMENTE EL TEXTO CON LA RESPUESTA\n\
         if adictionalInfo:
            message2 = f" Para que las preguntas sean más concretas, te detallo a continuación los temas dados durante la asignatura{adictionalInfo}"          
            message = message + message2
-           print(message)
            # Respuesta recibida introduciendo el mensaje formado por la petición básica y la información adiccional
            response = model.generate_content([message])    
             
         else:
-           print(message)
            # Respuesta recibida introduciendo el mensaje formado por la petición básica
            response = model.generate_content([message])
         
-        print(response.text)
                  
         # Patrones de expresiones regulares para extraer preguntas y respuestas del texto generado
         patternQ = r'[1-9][0-9]?\..*?(?=\(A\))'
@@ -167,8 +161,6 @@ Respuesta: (B) AQUI VUELVE A ESCRIBIR ESTRICTAMENTE EL TEXTO CON LA RESPUESTA\n\
         for CAnswers in listCAnswers:
             listCAnswersAux.append(CAnswers.split("Respuesta: ")[1])
         listCAnswers = listCAnswersAux
-    print(listQuestions)
-    print(listAnswers)
     # Devolver las listas de preguntas, respuestas y respuestas correctas
     return listQuestions, listAnswers, listCAnswers
 

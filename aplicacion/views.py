@@ -58,9 +58,9 @@ def register(request):
         - Se genera un código de seguridad único para la verificación del correo electrónico.
         - Se envía un correo electrónico de verificación al usuario.
         - Se guarda un token de verificación en la base de datos.
-        - Se renderiza la plantilla 'registration/verification.html'.
+        - Se renderiza la plantilla 'verification.html'.
     - Si el método de solicitud no es POST o el formulario no es válido:
-        - Se renderiza la plantilla 'registration/register.html' con el formulario de registro.
+        - Se renderiza la plantilla 'register.html' con el formulario de registro.
 
     """
     if request.method == 'POST':
@@ -101,13 +101,13 @@ def register(request):
             token.save()
 
             # Renderizar la plantilla de verificación de registro
-            return render(request, 'registration/verification.html')
+            return render(request, 'verification.html')
     else:
         # Si la solicitud no es de tipo POST, mostrar el formulario de registro vacío
         form = RegisterForm()
 
     # Renderizar la plantilla de registro con el formulario correspondiente
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
     
 @login_required
 def postlogin(request):
@@ -121,7 +121,7 @@ def postlogin(request):
     - Si el método de solicitud es GET:
         - Se genera un código QR único para la autenticación de dos factores (2FA).
         - Se envía un correo electrónico al usuario con el código QR adjunto.
-        - Se renderiza la plantilla 'registration/postlogin.html' con el formulario para ingresar el código.
+        - Se renderiza la plantilla 'postlogin.html' con el formulario para ingresar el código.
     - Si el método de solicitud es POST:
         - Se verifica el código ingresado por el usuario.
         - Si el código es válido, se marca al usuario como verificado y se redirige a la página de inicio.
@@ -147,7 +147,7 @@ def postlogin(request):
         utils.sendEmail(email, 'No-replay', 'Hello', f'aplicacion/static/qrcode/qr_{userAux.username}.png')
 
         # Renderizado de la plantilla para ingresar el código
-        return render(request, 'registration/postlogin.html', {'form': CodeForm(request.POST)})
+        return render(request, 'postlogin.html', {'form': CodeForm(request.POST)})
     else:
         # Si la solicitud es POST, verificar el código ingresado por el usuario
         form = CodeForm(request.POST)
@@ -180,13 +180,13 @@ def postlogin(request):
                 if request.session['login_attempts'] >= MAX_ATTEMPTS:
                     del request.session['login_attempts']
                     error = "El proceso de inicio de sesión no se ha completado correctamente porque se ha alcanzado el número máximo de intentos. En unos segundos será redirigido al menú inicial del programa. Si quiere usar la aplicación deberá repetir el proceso."
-                    return render(request, 'registration/redirect_attempts.html', {'error': error})
+                    return render(request, 'redirect_attempts.html', {'error': error})
                 
                 else:
                     # Si no se supera el número máximo de intentos, volver a renderizar la página de inicio con un mensaje de error
-                    return render(request, 'registration/postlogin.html', {'form': CodeForm(request.POST)})
+                    return render(request, 'postlogin.html', {'form': CodeForm(request.POST)})
 
-        return render(request, 'registration/postlogin.html', {'form': CodeForm(request.POST)})
+        return render(request, 'postlogin.html', {'form': CodeForm(request.POST)})
 
 @require_http_methods(["GET", "POST"])         
 def verification(request):
@@ -209,23 +209,23 @@ def verification(request):
     if not token:
         # Si no se encuentra el token en la URL, se muestra un mensaje de error
         error = "El proceso de verificación ha fallado porque el token no ha sido encontrado. Si desea registrarse en la aplicación deberá repetir el proceso."
-        return render(request, 'registration/redirect_registration.html', {'error': error})
+        return render(request, 'redirect_registration.html', {'error': error})
     if not userId:
         # Si no se encuentra el ID de usuario en la URL, se muestra un mensaje de error
         error = "El proceso de verificación ha fallado porque el usuario no ha sido encontrado. Si desea registrarse en la aplicación deberá repetir el proceso."
-        return render(request, 'registration/redirect_registration.html', {'error': error})
+        return render(request, 'redirect_registration.html', {'error': error})
         
     match = re.match(r'^[A-Za-z0-9]{32}$', token)
     if not match:
         # Si el formato del token es incorrecto, se muestra un mensaje de error
         error = "El proceso de verificación ha fallado porque el token es incorrecto. Si desea registrarse en la aplicación deberá repetir el proceso."
-        return render(request, 'registration/redirect_registration.html', {'error': error})
+        return render(request, 'redirect_registration.html', {'error': error})
     
     match = re.match(r'^[0-9]*$', str(userId))
     if not match:
         # Si el formato del ID de usuario es incorrecto, se muestra un mensaje de error
         error = 'El proceso de verificación ha fallado porque el usuario es incorrecto. Si desea registrarse en la aplicación deberá repetir el proceso.'
-        return render(request, 'registration/redirect_registration.html', {'error': error})
+        return render(request, 'redirect_registration.html', {'error': error})
     try:
         # Se intenta obtener el objeto token de la base de datos
         tokenObject = models.Token.objects.get(tempUserId=userId)
@@ -233,7 +233,7 @@ def verification(request):
         # Si no se encuentra el token en la base de datos, se muestra un mensaje de error
         
         error = "El proceso de verificación ha fallado porque el token del usuario no ha sido encontrado. Si desea registrarse en la aplicación deberá repetir el proceso."
-        return render(request, 'registration/redirect_registration.html', {'error': error})
+        return render(request, 'redirect_registration.html', {'error': error})
     
     if hashlib.sha256(bytes(token,'utf-8')).hexdigest() == tokenObject.token:        
         # Si el token es correcto, se verifica si ha caducado
@@ -241,7 +241,7 @@ def verification(request):
             # Si ha caducado, se muestra un mensaje de error y se eliminan los datos temporales
             tempUser.delete()
             error = "El proceso de verificación ha fallado porque el token es correcto pero ha caducado. Si desea registrarse en la aplicación deberá repetir el proceso."
-            return render(request, 'registration/redirect_registration.html', {'error': error})
+            return render(request, 'redirect_registration.html', {'error': error})
         else:
             # Si el token es válido, se coge el usuario temporal, se decodifica la contraseña y 
             # se guarda al usuario en la base de datos definitiva
@@ -262,7 +262,7 @@ def verification(request):
         # Si el token es incorrecto, se muestra un mensaje de error y se eliminan los datos temporales
         error = 'El proceso de verificación ha fallado porque el token es incorrecto. Si desea registrarse en la aplicación deberá repetir el proceso.'
         tempUser.delete()
-        return render(request, 'registration/redirect_registration.html', {'error': error})
+        return render(request, 'redirect_registration.html', {'error': error})
 
 def home(request: object):
     """
@@ -330,7 +330,6 @@ def questions(request):
         - Renderiza la plantilla 'testQuestions.html' o 'shortQuestions.html' con las preguntas generadas y sus respuestas, dependiendo del tipo de pregunta
     """
     form = QuestionForm(data=request.POST, userId=request.user.pk)
-    print(form)
     if form.is_valid():
            
         # Si el formulario es válido, obtener los datos del formulario
@@ -563,8 +562,6 @@ def addQuestion(request):
             # Si no existe un diccionario de preguntas en la sesión, se crea uno vacío
             request.session['questionDict'] = {}
         questionDict: dict = request.session['questionDict']
-        print("antes")
-        print(questionDict)
             
         if questionDict.get(testId) is None:
             # Si el test aún no tiene un diccionario de preguntas asociado, se crea uno vacío para ese test
@@ -580,8 +577,6 @@ def addQuestion(request):
             # Si la pregunta no está en el diccionario de preguntas del test, se añade al diccionario de preguntas del test
             questionDict[testId][questionId] = ""
         request.session['questionDict'] = questionDict
-        print("despues")
-        print(questionDict)
         return HttpResponse("200")
 
 @require_http_methods(['POST'])
@@ -610,30 +605,25 @@ def updateTest(request):
         # Si se proporciona un 'name' en la solicitud POST, se obtienen los nombres de las preguntas del test y 
         # se almacenan en un diccionario
         names = dict(json.loads(request.POST.get('name')))
-        print(names)
     
     questionDict: dict = None
     testIdOrigin = None
     if request.POST.get('testIdOrigin'):
         # Si se proporciona un 'testIdOrigin' en la solicitud POST, se obtiene el ID del test original que se está modificando
         testIdOrigin = request.POST['testIdOrigin']
-        print(testIdOrigin)
     
     if request.session.get('questionDict'):
         # Si existe un diccionario de preguntas en la sesión del usuario, se obtiene y se actualiza
         questionDict: dict = request.session['questionDict']
-        print(questionDict)
         if names:
             # Si se obtuvieron nombres de preguntas, se actualizan en el diccionario de preguntas
             for key, value in names.items():
                 questionDict[testIdOrigin][key] = value
         # Se actualiza el diccionario de la sesión
         request.session['questionDict'] = questionDict
-        print(questionDict)
     
     # Se obtiene el ID del test siguiente desde la solicitud POST
     test_id = request.POST['testIdNext']
-    print(test_id)
     testId = int(test_id.split("test")[1])
     # Se obtiene el test que corresponde al identificador obtenido
     test = models.TestQuestionsAnswers.objects.get(id=testId)
@@ -703,7 +693,6 @@ def deleteTest(request):
         # Si el 'testId' existe en el diccionario de preguntas, se elimina y se actualiza la sesión
         del questionDict[testId]
         request.session['questionDict'] = questionDict
-        print(request.session['questionDict'])  # Imprimir el diccionario de preguntas actualizado (para depuración)
     # Este o no el test se vuelve con estado 200 tras eliminarlo del diccionario
     return HttpResponse("200")
         
